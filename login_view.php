@@ -1,0 +1,107 @@
+<?php // Ce fichier doit s'appeler login_view.php ?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SUIVI FACTURES DP – Connexion</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Nunito:wght@300;400;600&display=swap');
+    :root { --accent: #e05c00; --accent2: #00bfff; --dark: #0d0f14; --glass-bg: rgba(255,255,255,0.06); --glass-border: rgba(255,255,255,0.12); }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Nunito', sans-serif; background: var(--dark); min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+    .bg-blob { position: fixed; border-radius: 50%; filter: blur(90px); opacity: 0.18; animation: float 8s ease-in-out infinite; pointer-events: none; }
+    .blob1 { width: 500px; height: 500px; background: var(--accent); top: -150px; left: -150px; }
+    .blob2 { width: 400px; height: 400px; background: var(--accent2); bottom: -120px; right: -100px; animation-delay: -4s; }
+    .blob3 { width: 300px; height: 300px; background: #6a00ff; top: 50%; left: 50%; animation-delay: -2s; }
+    @keyframes float { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(30px,-30px) scale(1.05); } }
+    body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 50px 50px; pointer-events: none; }
+    .login-wrapper { position: relative; z-index: 10; width: 100%; max-width: 430px; padding: 20px; animation: slideUp 0.7s cubic-bezier(0.16,1,0.3,1) both; }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+    .glass-card { background: var(--glass-bg); border: 1px solid var(--glass-border); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-radius: 20px; padding: 48px 40px 40px; box-shadow: 0 24px 64px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08); }
+    .brand { text-align: center; margin-bottom: 36px; }
+    .brand-icon { width: 100px; height: 100px; border-radius: 16px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px; box-shadow: 0 8px 28px rgba(224,92,0,0.35); overflow: hidden; background: #f5a800; }
+    .brand-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .brand h1 { font-family: 'Rajdhani', sans-serif; font-size: 1.7rem; font-weight: 700; color: #fff; letter-spacing: 2px; line-height: 1.1; }
+    .brand p { font-size: 0.78rem; color: rgba(255,255,255,0.4); letter-spacing: 3px; text-transform: uppercase; margin-top: 4px; }
+    .form-label { color: rgba(255,255,255,0.55); font-size: 0.78rem; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; font-weight: 600; }
+    .input-group-text { background: rgba(255,255,255,0.06); border: 1px solid var(--glass-border); border-right: none; color: rgba(255,255,255,0.4); }
+    .form-control { background: rgba(255,255,255,0.06); border: 1px solid var(--glass-border); border-left: none; color: #fff; font-size: 0.95rem; padding: 12px 16px; transition: all 0.3s; }
+    .form-control:focus { background: rgba(255,255,255,0.1); border-color: var(--accent); box-shadow: 0 0 0 3px rgba(224,92,0,0.2); color: #fff; outline: none; }
+    .form-control::placeholder { color: rgba(255,255,255,0.25); }
+    .role-select { background: rgba(255,255,255,0.06); border: 1px solid var(--glass-border); color: rgba(255,255,255,0.7); font-size: 0.9rem; padding: 12px 16px; border-radius: 8px; width: 100%; appearance: none; cursor: pointer; transition: all 0.3s; }
+    .role-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(224,92,0,0.2); outline: none; background: rgba(255,255,255,0.1); }
+    .role-select option { background: #1a1d24; color: #fff; }
+    .btn-login { background: linear-gradient(135deg, var(--accent), #ff6a00); border: none; color: #fff; font-family: 'Rajdhani', sans-serif; font-size: 1.05rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 14px; border-radius: 10px; width: 100%; margin-top: 8px; cursor: pointer; transition: all 0.3s; box-shadow: 0 6px 20px rgba(224,92,0,0.35); }
+    .btn-login:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(224,92,0,0.5); }
+    .footer-text { text-align: center; font-size: 0.75rem; color: rgba(255,255,255,0.2); margin-top: 24px; }
+    .alert-danger { background: rgba(220,53,69,0.15); border: 1px solid rgba(220,53,69,0.3); color: #ff6b7a; border-radius: 10px; font-size: 0.85rem; padding: 10px 16px; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+  <div class="bg-blob blob1"></div>
+  <div class="bg-blob blob2"></div>
+  <div class="bg-blob blob3"></div>
+
+  <div class="login-wrapper">
+    <div class="glass-card">
+
+      <div class="brand">
+        <div class="brand-icon">
+          <img src="images/sonatrach.jpg" alt="Sonatrach Logo">
+        </div>
+        <h1>SUIVI FACTURES</h1>
+        <p>Direction des Projets</p>
+      </div>
+
+      <?php if (!empty($error)): ?>
+        <div class="alert-danger"><?= htmlspecialchars($error) ?></div>
+      <?php endif; ?>
+
+      <form action="login.php" method="POST" novalidate>
+
+        <div class="mb-3">
+          <label class="form-label">Nom d'utilisateur</label>
+          <div class="input-group">
+            <span class="input-group-text">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 4-1.8 4-4s-1.3-4-4-4-4 1.8-4 4 1.3 4 4 4zm0 2c-4 0-6 2-6 3v1h12v-1c0-1-2-3-6-3z"/></svg>
+            </span>
+            <input type="text" class="form-control" name="username" placeholder="Entrez votre nom d'utilisateur" required autocomplete="username" value="<?= htmlspecialchars($_POST['username'] ?? '') ?>">
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Mot de passe</label>
+          <div class="input-group">
+            <span class="input-group-text">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6a5 5 0 0 0-10 0v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2zm-6 9a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm3.1-9H8.9V6a3.1 3.1 0 0 1 6.2 0v2z"/></svg>
+            </span>
+            <input type="password" class="form-control" name="password" placeholder="••••••••" required autocomplete="current-password">
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label">Rôle</label>
+          <div style="position:relative;">
+            <select class="role-select" name="role" required>
+              <option value="" disabled selected>-- Sélectionner votre rôle --</option>
+              <option value="user"         <?= (($_POST['role'] ?? '') === 'user')         ? 'selected' : '' ?>>User Région</option>
+              <option value="secretaire"   <?= (($_POST['role'] ?? '') === 'secretaire')   ? 'selected' : '' ?>>Secrétaire</option>
+              <option value="gestionnaire" <?= (($_POST['role'] ?? '') === 'gestionnaire') ? 'selected' : '' ?>>Gestionnaire de Traitement</option>
+              <option value="admin"        <?= (($_POST['role'] ?? '') === 'admin')        ? 'selected' : '' ?>>Administrateur</option>
+            </select>
+            <svg style="position:absolute;right:14px;top:50%;transform:translateY(-50%);pointer-events:none;opacity:0.4;" width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M7 10l5 5 5-5z"/></svg>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-login">Connexion →</button>
+      </form>
+
+      <p class="footer-text">© 2025–2026 Direction des Projets · PFE ASMA</p>
+    </div>
+  </div>
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
